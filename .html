@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pour Lea | 8 Mars 🌹</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --8m-purple: #7b2cbf;
+            --pink-bright: #ff4fa3;
+            --pink-light: #ffc6e5;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, var(--pink-light), #f8bbd0, #e1bee7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        /* --- SOBRE INICIAL --- */
+        #contenedor-inicio { text-align: center; cursor: pointer; z-index: 10; }
+        #sobre { font-size: 100px; animation: bounce 2s infinite; }
+        .hint { font-family: 'Press Start 2P', cursive; font-size: 8px; color: var(--8m-purple); margin-top: 20px; padding: 0 10px; }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* --- CARTA OPTIMIZADA --- */
+        #carta {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            width: 85%;
+            max-width: 500px;
+            height: 80vh;
+            overflow-y: auto;
+            padding: 25px;
+            border-radius: 30px;
+            border: 3px solid var(--8m-purple);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 20;
+        }
+
+        .status-bar {
+            background: rgba(123, 44, 191, 0.08);
+            border-radius: 15px;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--8m-purple);
+        }
+
+        .clocks {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 7px;
+            color: var(--8m-purple);
+            margin-bottom: 5px;
+        }
+
+        #texto-carta {
+            white-space: pre-line;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #2d3436;
+            text-align: left;
+            margin-bottom: 25px;
+            padding-left: 15px;
+            border-left: 3px solid var(--pink-bright);
+        }
+
+        /* --- ESCENA ADAPTABLE --- */
+        #escena-pixel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            font-size: 45px;
+            margin: 30px 0;
+        }
+
+        .pixel-mover { transition: all 4s ease-in-out; }
+
+        /* --- DECORACIÓN --- */
+        .element { position: fixed; top: -50px; font-size: 20px; pointer-events: none; z-index: 1000; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        .btn-music {
+            position: fixed; top: 15px; right: 15px;
+            background: var(--8m-purple); color: white;
+            border: none; padding: 10px; border-radius: 10px;
+            font-family: 'Press Start 2P', cursive; font-size: 7px; z-index: 100;
+        }
+
+        #gato-btn { position: fixed; bottom: 15px; right: 15px; font-size: 35px; z-index: 50; }
+        #tortuga-btn { position: fixed; bottom: 15px; left: -50px; font-size: 30px; animation: crawl 18s linear infinite; z-index: 50; }
+
+        @keyframes crawl { from { left: -50px; } to { left: 110vw; } }
+
+    </style>
+</head>
+<body>
+
+    <button class="btn-music" onclick="toggleMusic()">🎶 MUSIQUE</button>
+
+    <div id="contenedor-inicio" onclick="abrirCarta()">
+        <div id="sobre">💌</div>
+        <div class="hint">CLIQUEZ POUR OUVRIR LE CADEAU</div>
+    </div>
+
+    <div id="carta">
+        <div class="status-bar">
+            <div class="clocks">
+                <div>COLOMBIE: <span id="col-time">--:--</span></div>
+                <div>ST-MALO: <span id="fr-time">--:--</span></div>
+            </div>
+            <div style="font-size: 9px; color: var(--8m-purple); text-align: center; font-weight: bold;">
+                 De Colombie vers ma française préférée ❤️
+            </div>
+        </div>
+
+        <h1 style="color: var(--8m-purple); font-family: 'Press Start 2P', cursive; font-size: 12px; text-align: center; line-height: 1.4;">
+            Joyeuse Journée de la Femme, Lea 🌸
+        </h1>
+
+        <div id="texto-carta"></div>
+
+        <div id="escena-pixel">
+            <div id="p-el" class="pixel-mover">🧔‍♂️</div>
+            <div id="corazon-centro" style="opacity: 0; font-size: 25px;">💖</div>
+            <div id="p-ella" class="pixel-mover">👩‍🦰</div>
+        </div>
+
+        <p style="text-align:center; font-size: 13px; color: var(--8m-purple); font-weight: bold; padding-bottom: 20px;">
+            "La distance n'est rien quand quelqu'un représente tout."
+        </p>
+    </div>
+
+    <div id="gato-btn" onclick="miau()">🐱</div>
+    <div id="tortuga-btn">🐢</div>
+
+    <audio id="musica" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8c8a73467.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const mensaje = `Mon amour, Lea,
+
+        Aujourd'hui, pour la Journée de la Femme, je voulais t'envoyer ce petit message spécial depuis la Colombie jusqu'à Saint-Malo.
+
+        Je t'admire énormément. Tu es une femme forte, indépendante et lumineuse. Ta culture et ta force m'inspirent chaque jour.
+
+        🌸 Tu es belle comme un lys.
+        🐢 Tu es patiente et constante.
+        🐱 Tu es adorable comme un chaton.
+
+        Peu importe la distance, mon cœur est avec toi en France.
+        Bonne fête, ma reine. Je t'aime.`;
+
+        let index = 0;
+        function escribir() {
+            if (index < mensaje.length) {
+                document.getElementById("texto-carta").innerHTML += mensaje.charAt(index);
+                index++;
+                setTimeout(escribir, 40);
+            } else {
+                reunirPersonajes();
+            }
+        }
+
+        function abrirCarta() {
+            document.getElementById("contenedor-inicio").style.display = "none";
+            document.getElementById("carta").style.display = "block";
+            const audio = document.getElementById("musica");
+            audio.play().catch(() => console.log("Audio needs interaction"));
+            escribir();
+            iniciarLluvia();
+        }
+
+        function reunirPersonajes() {
+            document.getElementById("p-el").style.transform = "translateX(15px)";
+            document.getElementById("p-ella").style.transform = "translateX(-15px)";
+            setTimeout(() => {
+                document.getElementById("corazon-centro").style.opacity = "1";
+            }, 1500);
+        }
+
+        function iniciarLluvia() {
+            setInterval(() => {
+                const el = document.createElement("div");
+                el.className = "element";
+                el.innerHTML = ["🌸", "💖", "🇫🇷", "✨"][Math.floor(Math.random() * 4)];
+                el.style.left = Math.random() * 100 + "vw";
+                el.style.animation = `fall ${Math.random() * 3 + 5}s linear forwards`;
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 7000);
+            }, 800);
+        }
+
+        function updateClocks() {
+            const opt = { hour: '2-digit', minute: '2-digit', hour12: false };
+            document.getElementById('col-time').innerText = new Date().toLocaleTimeString('es-CO', { ...opt, timeZone: 'America/Bogota' });
+            document.getElementById('fr-time').innerText = new Date().toLocaleTimeString('fr-FR', { ...opt, timeZone: 'Europe/Paris' });
+        }
+        setInterval(updateClocks, 1000);
+        updateClocks();
+
+        function miau() {
+            alert("🐱 Un bisou de Colombie est arrivé à Saint-Malo ! Miaou !");
+        }
+
+        function toggleMusic() {
+            const m = document.getElementById("musica");
+            m.paused ? m.play() : m.pause();
+        }
+    </script>
+</body>
+</html>
